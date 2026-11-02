@@ -16,6 +16,8 @@ The SSEN Embedded SW LIG D&A 5기 코딩테스트 스터디 저장소입니다.
 
 못 푼 문제가 있어도 시도한 코드와 막힌 지점을 적어 PR을 올려 주세요. 그런 PR에서 가장 많이 배웁니다.
 
+AI에게 설명을 듣고 풀었다면 이해한 내용을 자기 말로 풀어서 주석에 남깁니다. 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md#주석-작성)를 참고하세요.
+
 ## 폴더 구조
 
 ```text
@@ -36,36 +38,21 @@ week01/
 
 제출과 리뷰 절차는 [CONTRIBUTING.md](CONTRIBUTING.md)에 있습니다.
 
-## 리뷰 담당자 정하기
-
-아래 멤버 표의 번호로 담당자를 정합니다. 매주 조합이 바뀌고, 모두가 매주 2개의 PR을 리뷰합니다.
-
-```text
-offset = (주차 - 1) % 9 + 1
-
-내 PR의 리뷰어 = 내 번호 + offset, 내 번호 + offset + 1
-(11을 넘으면 11을 뺍니다)
-```
-
-예를 들어 3주차는 offset이 3이므로, 1번의 리뷰어는 4번과 5번이고 11번의 리뷰어는 3번과 4번입니다.
-
-인원이 바뀌면 11을 현재 인원 N으로, 9를 N - 2로 바꿔서 계산합니다.
-
 ## 멤버
 
 | 번호 | 이름 | 파일 이름 | GitHub |
 | --- | --- | --- | --- |
-| 1 | 김재환 | jaehwan | jh-stpn |
-| 2 | 김주형 | juhyeong | kimjoohyungsd |
-| 3 | 박제영 | jeyoung | |
-| 4 | 백울일 | ulil | |
-| 5 | 서의진 | uijin | |
-| 6 | 안의찬 | euichan | Hanyangsaja |
-| 7 | 이지훈 | jihoon | |
-| 8 | 전진성 | jinseong | notCoderJ |
-| 9 | 주윤빈 | yunbin | dkdltm221 |
+| 1 | 김재환 | jaehwan | [<img src="https://github.com/jh-stpn.png?size=40" width="40" height="40" alt="jh-stpn"> jh-stpn](https://github.com/jh-stpn) |
+| 2 | 김주형 | juhyeong | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
+| 3 | 박제영 | jeyoung | [<img src="https://github.com/jae0000.png?size=40" width="40" height="40" alt="jae0000"> jae0000](https://github.com/jae0000) |
+| 4 | 백웅일 | ulil | callbyreference-gibhub |
+| 5 | 서의진 | uijin | [<img src="https://github.com/se71nny.png?size=40" width="40" height="40" alt="se71nny"> se71nny](https://github.com/se71nny) |
+| 6 | 안의찬 | euichan | [<img src="https://github.com/Hanyangsaja.png?size=40" width="40" height="40" alt="Hanyangsaja"> Hanyangsaja](https://github.com/Hanyangsaja) |
+| 7 | 이지훈 | jihoon | [<img src="https://github.com/codehooni.png?size=40" width="40" height="40" alt="codehooni"> codehooni](https://github.com/codehooni) |
+| 8 | 전진성 | jinseong | [<img src="https://github.com/notCoderJ.png?size=40" width="40" height="40" alt="notCoderJ"> notCoderJ](https://github.com/notCoderJ) |
+| 9 | 주윤빈 | yunbin | [<img src="https://github.com/dkdltm221.png?size=40" width="40" height="40" alt="dkdltm221"> dkdltm221](https://github.com/dkdltm221) |
 | 10 | 김재희 | jaehee | |
-| 11 | 최원준 | wonjun | |
+| 11 | 최원준 | wonjun | [<img src="https://github.com/Dreaming1024155.png?size=40" width="40" height="40" alt="Dreaming1024155"> Dreaming1024155](https://github.com/Dreaming1024155) |
 
 ## 주의 사항
 
