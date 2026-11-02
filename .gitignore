@@ -1,0 +1,28 @@
+# 빌드 결과물
+*.exe
+*.out
+*.o
+*.obj
+*.pdb
+*.ilk
+a.out
+build/
+Debug/
+Release/
+x64/
+
+# 테스트 입출력
+input.txt
+output.txt
+
+# IDE
+.vscode/
+.idea/
+.vs/
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
