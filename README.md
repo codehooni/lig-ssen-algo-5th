@@ -45,7 +45,7 @@ week01/
 | 1 | 김재환 | jaehwan | [<img src="https://github.com/jh-stpn.png?size=40" width="40" height="40" alt="jh-stpn"> jh-stpn](https://github.com/jh-stpn) |
 | 2 | 김주형 | juhyeong | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
 | 3 | 박제영 | jeyoung | [<img src="https://github.com/jae0000.png?size=40" width="40" height="40" alt="jae0000"> jae0000](https://github.com/jae0000) |
-| 4 | 백웅일 | ulil | callbyreference-gibhub |
+| 4 | 백웅일 | ulil | [<img src="https://github.com/callbyreference-github.png?size=40" width="40" height="40" alt="callbyreference-github"> callbyreference-github](https://github.com/callbyreference-github) |
 | 5 | 서의진 | uijin | [<img src="https://github.com/se71nny.png?size=40" width="40" height="40" alt="se71nny"> se71nny](https://github.com/se71nny) |
 | 6 | 안의찬 | euichan | [<img src="https://github.com/Hanyangsaja.png?size=40" width="40" height="40" alt="Hanyangsaja"> Hanyangsaja](https://github.com/Hanyangsaja) |
 | 7 | 이지훈 | jihoon | [<img src="https://github.com/codehooni.png?size=40" width="40" height="40" alt="codehooni"> codehooni](https://github.com/codehooni) |
