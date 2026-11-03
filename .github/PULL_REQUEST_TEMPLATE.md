@@ -2,7 +2,7 @@
 
 | 문제 | 상태 | 알고리즘 | 시간 복잡도 |
 | --- | --- | --- | --- |
-| [BOJ 1000](https://www.acmicpc.net/problem/1000) | 성공 / 실패 / 시도 중 | | |
+| [BOJ1000](https://www.acmicpc.net/problem/1000) | 성공 / 실패 / 시도 중 | | |
 
 ## 접근 방법
 
