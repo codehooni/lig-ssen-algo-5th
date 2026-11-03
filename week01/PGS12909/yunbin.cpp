@@ -1,21 +1,18 @@
 #include<string>
 #include <iostream>
-#include <stack>
 using namespace std;
 
 bool solution(string s)
 {
-    stack<char> stack;
+    //int를 stack처럼 사용해보았사와요
+    int n=0;
     for(char c:s){
-        if(c=='('){
-            stack.push(c);
-            continue;
-        }
-        else if(stack.empty()) return false;
-        stack.pop();
+        if(c=='(') n++;
+        else if(n==0) return false;
+        else n--;
     }
 
-    if(!stack.empty())
+    if(n!=0)
         return false;
 
     return true;
