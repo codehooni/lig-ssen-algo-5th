@@ -16,8 +16,8 @@ README의 멤버 표에 GitHub 아이디도 추가해 주세요.
 | 구분 | 형식 | 예시 |
 | --- | --- | --- |
 | 브랜치 | `<멤버 표의 파일 이름>/weekNN` | `jihoon/week01` |
-| 풀이 커밋 | `weekNN: <문제 폴더> 풀이` | `week01: BOJ1260 풀이` |
-| 리뷰 반영 커밋 | `weekNN: <문제 폴더> 리뷰 반영` | `week01: BOJ1260 리뷰 반영` |
+| 풀이 커밋 | `weekNN: <문제 폴더> 풀이` | `week01: PGS12906 풀이` |
+| 리뷰 반영 커밋 | `weekNN: <문제 폴더> 리뷰 반영` | `week01: PGS12906 리뷰 반영` |
 
 ## 풀이 제출
 
@@ -29,9 +29,9 @@ git switch main
 git pull
 git switch -c jihoon/week01
 
-# 2. week01/BOJ1260/jihoon.cpp 작성 후 커밋 (폴더가 없으면 만듭니다)
+# 2. week01/PGS12906/jihoon.cpp 작성 후 커밋 (폴더가 없으면 만듭니다)
 git add week01
-git commit -m "week01: BOJ1260 풀이"
+git commit -m "week01: PGS12906 풀이"
 
 # 3. 올리기
 git push -u origin jihoon/week01

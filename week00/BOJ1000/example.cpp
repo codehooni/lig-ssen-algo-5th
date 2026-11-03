@@ -1,4 +1,4 @@
-// BOJ 1000 A+B
+// BOJ1000 A+B
 // https://www.acmicpc.net/problem/1000
 // 시간 복잡도: O(1)
 
