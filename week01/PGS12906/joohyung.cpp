@@ -4,6 +4,10 @@
 #include <algorithm>
 using namespace std;
 
+
+// 핵심 로직: Stack
+// 선택 근거: 가장 최근 들어온 값이랑 현재 들어오는 값을 비교하는 로직이 Stack의 가장 적합하다  
+
 // 풀이법 1: stack의 설정 
 vector<int> solution(vector<int> arr) 
 {

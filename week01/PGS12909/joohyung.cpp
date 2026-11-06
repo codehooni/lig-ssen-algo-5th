@@ -2,6 +2,9 @@
 #include <iostream>
 #include <stack>
 using namespace std;
+// 핵심 로직: Stack
+// 선택 근거: 닫는 괄호 ')'가 나오면 항상 가장 최근의 나온 여는 괄호 '('에 대응되므로 stack이 적절할 것이라 생각했습니다 
+
 
 // 1번 풀이: 
 // 1. s 내부에 char 들을 탐색하는 도중에는 닫는 괄호 ')'의 개수가 여는 괄호 '(' 보다 항상 작아야 한다
