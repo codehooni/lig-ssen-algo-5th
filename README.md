@@ -51,7 +51,7 @@ week01/
 | 7 | 이지훈 | jihoon | [<img src="https://github.com/codehooni.png?size=40" width="40" height="40" alt="codehooni"> codehooni](https://github.com/codehooni) |
 | 8 | 전진성 | jinseong | [<img src="https://github.com/notCoderJ.png?size=40" width="40" height="40" alt="notCoderJ"> notCoderJ](https://github.com/notCoderJ) |
 | 9 | 주윤빈 | yunbin | [<img src="https://github.com/dkdltm221.png?size=40" width="40" height="40" alt="dkdltm221"> dkdltm221](https://github.com/dkdltm221) |
-| 10 | 김재희 | jaehee | |
+| 10 | 김재희 | jaehee | [<img src="https://github.com/jaeee320.png?size=40" width="40" height="40" alt="jaeee320"> jaeee320](https://github.com/jaeee320) |
 | 11 | 최원준 | wonjun | [<img src="https://github.com/Dreaming1024155.png?size=40" width="40" height="40" alt="Dreaming1024155"> Dreaming1024155](https://github.com/Dreaming1024155) |
 
 ## 주의 사항

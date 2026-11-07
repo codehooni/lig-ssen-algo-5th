@@ -29,9 +29,12 @@ git switch main
 git pull
 git switch -c jihoon/week01
 
-# 2. week01/PGS12906/jihoon.cpp 작성 후 커밋 (폴더가 없으면 만듭니다)
-git add week01
+# 2. 문제마다 따로 커밋하기 (폴더가 없으면 만듭니다)
+git add week01/PGS12906/jihoon.cpp
 git commit -m "week01: PGS12906 풀이"
+
+git add week01/PGS12909/jihoon.cpp
+git commit -m "week01: PGS12909 풀이"
 
 # 3. 올리기
 git push -u origin jihoon/week01
@@ -39,7 +42,7 @@ git push -u origin jihoon/week01
 
 그다음 GitHub에서 PR을 만듭니다.
 
-- 제목은 `[Week01] 이지훈` 형식으로 씁니다.
+- 제목은 `[Week01] 이지훈` 형식으로 씁니다. 커밋이 여러 개면 GitHub이 브랜치 이름을 제목으로 자동으로 채우니 꼭 바꿔 주세요.
 - 템플릿의 항목을 채웁니다.
 - README의 계산식으로 구한 리뷰어 2명을 Reviewers에 지정합니다.
 
