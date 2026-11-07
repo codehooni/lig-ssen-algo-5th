@@ -23,8 +23,8 @@ string solution(vector<string> participant, vector<string> completion) {
         //해시 자료구조이기 때문에 find, erase, find 모두 O(1)임.
         //_par.find(completion[i])의 경우 리턴값이 iterator이기 때문에 *을 붙여서
         //최종적으로 rvalue를 string으로 만들기
-        if(completion[i] == *(_par.find(completion[i]))) 
-            _par.erase(_par.find(completion[i]));
+        auto iter = _par.find(completion[i]);
+        if(iter != _par.end()) _par.erase(iter);
     }
     return *(_par.begin());
 }
