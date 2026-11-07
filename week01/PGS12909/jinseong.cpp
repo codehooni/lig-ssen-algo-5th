@@ -7,6 +7,22 @@ using namespace std;
     핵심 로직: 현재 괄호와 스택의 탑에 위치한 괄호를 비교하여, 잘못된 쌍을 이루면 false를 반환하고 아닌 경우 스택을 비워나간다.
 */
 
+// 원래 문제 풀이 추가
+bool solution(string s)
+{
+    bool answer = true;
+    stack<char> stk;
+    
+    for (char c : s) {
+        if (c == '(') stk.push(c);
+        else if (stk.size() == 0) return false; 
+        else stk.pop();
+    }
+    
+    return stk.size() == 0;
+}
+
+// 괄호 2개로 착각한 풀이
 bool solution(string s)
 {
     bool answer = true;
@@ -18,21 +34,11 @@ bool solution(string s)
             stk.push(c);
             continue;
         }
-        
-        char last = stk.top();
-        if (c == ')') {
-            if (last != '(') return false;
-            stk.pop();
-            continue;
-        }
-        
-        if (c == ']') {
-            if (last != '[') return false;
-            stk.pop();
-            continue;
-        }
-        
-        stk.push(c);
+
+        char last_pair = stk.top() == '(' ? ')' : ']';
+        if (last_pair == c) stk.pop();
+        else if (c == '(' || c == '[') stk.push(c);
+        else return false;
     }
     
     return stk.size() == 0;
