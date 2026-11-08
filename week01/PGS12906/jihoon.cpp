@@ -1,6 +1,6 @@
 /*
 1. 아이디어
-- 이전 숫자를 기억하는 변수를 만들고 이전 숫자와 같지 않을 때만 for문을 돌면서 배열에 넣는다.
+- 이전숫자를 배열의 마지막 원소로 생각하고 비교한다.
 
 2. 시간복잡도
 - O(N) < 1,000,000
@@ -14,19 +14,17 @@
 
 using namespace std;
 
-#if 0
+#if 1
 
 vector<int> solution(vector<int> arr) 
 {
     vector<int> answer;
-
-    int prev = -1;
     
-    for(int& a : arr) {
-        if(prev == a) continue;
-        
-        answer.push_back(a);
-        prev = a;
+    answer.push_back(arr.front());
+
+    for(auto it = arr.begin() + 1; it != arr.end(); it++) {
+        if(answer.back() == *it) continue;
+        answer.push_back(*it);
     }
     
     return answer;
@@ -40,7 +38,7 @@ erase, unique 함수를 이용한 풀이
 
 */
 
-#if 1
+#if 0
 
 #include <algorithm>
 
