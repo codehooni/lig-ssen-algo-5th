@@ -43,7 +43,7 @@ week01/
 | 번호 | 이름 | 파일 이름 | GitHub |
 | --- | --- | --- | --- |
 | 1 | 김재환 | jaehwan | [<img src="https://github.com/jh-stpn.png?size=40" width="40" height="40" alt="jh-stpn"> jh-stpn](https://github.com/jh-stpn) |
-| 2 | 김주형 | juhyeong | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
+| 2 | 김주형 | joohyung | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
 | 3 | 박제영 | jeyoung | [<img src="https://github.com/jae0000.png?size=40" width="40" height="40" alt="jae0000"> jae0000](https://github.com/jae0000) |
 | 4 | 백웅일 | ulil | [<img src="https://github.com/callbyreference-github.png?size=40" width="40" height="40" alt="callbyreference-github"> callbyreference-github](https://github.com/callbyreference-github) |
 | 5 | 서의진 | uijin | [<img src="https://github.com/se71nny.png?size=40" width="40" height="40" alt="se71nny"> se71nny](https://github.com/se71nny) |
