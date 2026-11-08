@@ -26,19 +26,13 @@ using namespace std;
 
 bool solution(string s)
 {
-    bool answer = true;
-
     stack<char> st;
     
     for(char& c : s) {
         if(c == '(') st.push('(');
-        else {
-            if(st.size() > 0) st.pop();
-            else return false;
-        }
+        else if(st.size() > 0) st.pop();
+        else return false;
     }
-    
-    if(st.size() != 0) answer = false;
 
-    return answer;
+    return st.empty();
 }
