@@ -43,7 +43,7 @@ week01/
 | 번호 | 이름 | 파일 이름 | GitHub |
 | --- | --- | --- | --- |
 | 1 | 김재환 | jaehwan | [<img src="https://github.com/jh-stpn.png?size=40" width="40" height="40" alt="jh-stpn"> jh-stpn](https://github.com/jh-stpn) |
-| 2 | 김주형 | juhyeong | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
+| 2 | 김주형 | joohyung | [<img src="https://github.com/kimjoohyungsd.png?size=40" width="40" height="40" alt="kimjoohyungsd"> kimjoohyungsd](https://github.com/kimjoohyungsd) |
 | 3 | 박제영 | jeyoung | [<img src="https://github.com/jae0000.png?size=40" width="40" height="40" alt="jae0000"> jae0000](https://github.com/jae0000) |
 | 4 | 백웅일 | ulil | [<img src="https://github.com/callbyreference-github.png?size=40" width="40" height="40" alt="callbyreference-github"> callbyreference-github](https://github.com/callbyreference-github) |
 | 5 | 서의진 | uijin | [<img src="https://github.com/se71nny.png?size=40" width="40" height="40" alt="se71nny"> se71nny](https://github.com/se71nny) |
@@ -51,8 +51,24 @@ week01/
 | 7 | 이지훈 | jihoon | [<img src="https://github.com/codehooni.png?size=40" width="40" height="40" alt="codehooni"> codehooni](https://github.com/codehooni) |
 | 8 | 전진성 | jinseong | [<img src="https://github.com/notCoderJ.png?size=40" width="40" height="40" alt="notCoderJ"> notCoderJ](https://github.com/notCoderJ) |
 | 9 | 주윤빈 | yunbin | [<img src="https://github.com/dkdltm221.png?size=40" width="40" height="40" alt="dkdltm221"> dkdltm221](https://github.com/dkdltm221) |
-| 10 | 김재희 | jaehee | |
+| 10 | 김재희 | jaehee | [<img src="https://github.com/jaeee320.png?size=40" width="40" height="40" alt="jaeee320"> jaeee320](https://github.com/jaeee320) |
 | 11 | 최원준 | wonjun | [<img src="https://github.com/Dreaming1024155.png?size=40" width="40" height="40" alt="Dreaming1024155"> Dreaming1024155](https://github.com/Dreaming1024155) |
+
+## 리뷰어 배정
+
+멤버 표를 번호 순서대로 원형으로 세우고, 내 번호에서 **k칸 뒤**와 **2k칸 뒤** 사람이 이번 주 내 리뷰어입니다. 11번 다음은 다시 1번입니다.
+
+- k는 주차 번호입니다. 11주차부터는 10을 뺀 값(11주차는 1, 12주차는 2)을 씁니다.
+- 번호 i인 멤버의 리뷰어: `(i - 1 + k) % 11 + 1`번, `(i - 1 + 2k) % 11 + 1`번
+
+모두가 리뷰어 2명을 받고, 담당 PR도 정확히 2개씩 돌아갑니다.
+
+PR을 만들면 GitHub Actions가 작성자의 GitHub 아이디를 위 멤버 표에서 찾고, branch 이름의 주차로 계산해서 리뷰어를 자동으로 지정합니다. 멤버가 바뀌면 멤버 표만 고치면 됩니다.
+
+| 주차 | 예시 |
+| --- | --- |
+| 1주차 (k = 1) | 7번 이지훈 → 8번 전진성, 9번 주윤빈 / 11번 최원준 → 1번 김재환, 2번 김주형 |
+| 2주차 (k = 2) | 7번 이지훈 → 9번 주윤빈, 11번 최원준 / 11번 최원준 → 2번 김주형, 4번 백웅일 |
 
 ## 주의 사항
 

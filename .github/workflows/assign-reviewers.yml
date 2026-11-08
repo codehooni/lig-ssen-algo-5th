@@ -1,0 +1,70 @@
+name: 리뷰어 자동 배정
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  assign:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+
+            // branch 이름에서 주차 읽기 (예: jihoon/week01, Jaehee/week01)
+            const m = pr.head.ref.match(/week(\d+)/i);
+            if (!m) {
+              core.info(`주차를 찾을 수 없는 branch라 건너뜁니다: ${pr.head.ref}`);
+              return;
+            }
+            const week = Number(m[1]);
+
+            // README 멤버 표에서 번호 순서대로 GitHub 아이디 읽기
+            const { data } = await github.rest.repos.getContent({
+              ...context.repo,
+              path: 'README.md',
+              ref: pr.base.ref,
+            });
+            const readme = Buffer.from(data.content, 'base64').toString('utf8');
+            const members = [];
+            for (const line of readme.split('\n')) {
+              const row = line.match(/^\|\s*(\d+)\s*\|.*\]\(https:\/\/github\.com\/([A-Za-z0-9-]+)\)\s*\|\s*$/);
+              if (row) members[Number(row[1]) - 1] = row[2];
+            }
+            const n = members.length;
+            if (n < 3 || members.includes(undefined)) {
+              core.setFailed(`README 멤버 표를 읽지 못했습니다: ${JSON.stringify(members)}`);
+              return;
+            }
+
+            // 작성자를 GitHub 아이디로 찾기
+            const author = pr.user.login.toLowerCase();
+            const i = members.findIndex((login) => login.toLowerCase() === author);
+            if (i < 0) {
+              core.info(`멤버 표에 없는 작성자라 건너뜁니다: ${pr.user.login}`);
+              return;
+            }
+
+            // README의 리뷰어 배정 계산식: k칸 뒤, 2k칸 뒤 (k는 1 ~ n-1)
+            const k = ((week - 1) % (n - 1)) + 1;
+            const reviewers = [members[(i + k) % n], members[(i + 2 * k) % n]];
+            core.info(`${week}주차 (k = ${k}) ${members[i]} → ${reviewers.join(', ')}`);
+
+            for (const reviewer of reviewers) {
+              try {
+                await github.rest.pulls.requestReviewers({
+                  ...context.repo,
+                  pull_number: pr.number,
+                  reviewers: [reviewer],
+                });
+              } catch (e) {
+                core.warning(`${reviewer} 지정 실패 (저장소 collaborator인지 확인해 주세요): ${e.message}`);
+              }
+            }
