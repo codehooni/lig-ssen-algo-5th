@@ -8,7 +8,7 @@
 - 첫번째 원소부터 비교를 하고 다르면 participant의 해당 요소를 반환한다.
 
 2. 시간복잡도
-- O(NlogN) < 2 * 100,000 * log(100,000) + 100,000 ~= 3,500,000
+- O(MNlogN) < 20 * 2 * 100,000 * log(100,000) + 100,000 * 20 ~= 72,000,000 < 1e8
 
 3. 자료구조
 
@@ -21,17 +21,13 @@
 using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
-    int i;
-    string answer = "";
-    
+
     sort(participant.begin(), participant.end());
     sort(completion.begin(), completion.end());
     
-    for(i = 0; i < completion.size(); i++) {
-        if(participant[i] != completion[i]) break;
+    for(int i = 0; i < completion.size(); i++) {
+        if(participant[i] != completion[i]) return participant[i];
     }
     
-    answer = participant[i];
-    
-    return answer;
+    return participant.back();
 }
