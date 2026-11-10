@@ -24,49 +24,82 @@ void init(vector<vector<int>> wires){
     }
 }
 
+//개선한 bfs
 void bfs(vector<vector<int>> wires,int n){
     for(auto& num : wires){
-        queue<int> left_que;
-        queue<int> right_que;
-        
-        int left=1,right=1;
-        left_que.push(num[0]);
-        right_que.push(num[1]);
+        queue<int> que;
+        int node_length=1;
+        que.push(num[0]);
         vector<int> visited(n+1,0);
         visited[num[0]] =1;
-        visited[num[1]] =1;
-        while(!left_que.empty() || !right_que.empty()){
-            
-            if(!left_que.empty()){
-                int left_index = left_que.front();left_que.pop();
-                vector<int> left_grp = grap[left_index];
-                for(int i : left_grp){
-                //간선을 끊어야한다.
-                if((left_index==num[0] && i==num[1]) ||
-                   (i==num[0] && left_index == num[1]|| visited[i])) continue;
+        
+        while(!que.empty()){
+            int index =que.front();que.pop();
+            vector<int> grp = grap[index];
+            for(int i : grp){
+                if((index==num[0] && i==num[1]) ||
+                    (i==num[0] && index == num[1]|| visited[i])) continue;
                 
-                visited[i]=1;
-                left++;
-                left_que.push(i);
-                }
-            }
-            if(!right_que.empty()){
-                int right_index = right_que.front(); right_que.pop();
-                vector<int> right_grp = grap[right_index];
-                for(int i : right_grp){
-                if(right_index == num[0] &&i==num[1] ||
-                   i == num[1] && right_index == num[1] || visited[i]) continue;
-                
-                visited[i]++;
-                right++;
-                right_que.push(i);
-                }
+                 visited[i]=1;
+                 node_length++;
+                 que.push(i);
             }
         }
-        answer = min(answer,abs(left-right));
-        
+        answer = min(answer, abs(node_length - (n - node_length)));
     }
 }
+
+//초기 bfs
+// void bfs(vector<vector<int>> wires,int n){
+//     //wires는 각 요소는 노드간의 연결을 말해준다.
+//     //그렇다면 배열의 요소를 통해 노드의 연결을 끊어버리면 어떨까?에서 시작했다.
+//     for(auto& num : wires){
+//         //각각 왼쪽과 오른쪽 노선의 정보를 담을 큐이다.
+//         queue<int> left_que;
+//         queue<int> right_que;
+//         //자신을 포함해야하므로 1로 초기화한다.
+//         int left=1,right=1;
+//         //초기 노드 삽입
+//         left_que.push(num[0]);
+//         right_que.push(num[1]);
+//         //bfs방식이기에 방문 표시를 할필요가있다.
+//         vector<int> visited(n+1,0);
+//         visited[num[0]] =1;
+//         visited[num[1]] =1;
+//         //각 큐 끝까지 탐색한다
+//         while(!left_que.empty() || !right_que.empty()){
+            
+//             if(!left_que.empty()){
+//                 int left_index = left_que.front();left_que.pop();
+//                 //꺼내온 인덱스와 인접한 모든노드의 정보를담은 백터 추출 
+//                 vector<int> left_grp = grap[left_index];
+//                 for(int i : left_grp){
+//                 //간선을 끊어야한다. 이 부분이 힘들었다.
+//                 if((left_index==num[0] && i==num[1]) ||
+//                    (i==num[0] && left_index == num[1]|| visited[i])) continue;
+                
+//                 visited[i]=1;
+//                 left++;
+//                 left_que.push(i);
+//                 }
+//             }
+//             if(!right_que.empty()){
+//                 int right_index = right_que.front(); right_que.pop();
+//                 vector<int> right_grp = grap[right_index];
+//                 for(int i : right_grp){
+//                 if(right_index == num[0] &&i==num[1] ||
+//                    i == num[1] && right_index == num[1] || visited[i]) continue;
+                
+//                 visited[i]++;
+//                 right++;
+//                 right_que.push(i);
+//                 }
+//             }
+//         }
+//         answer = min(answer,abs(left-right));
+        
+//     }
+// }
 int solution(int n, vector<vector<int>> wires) {
     init(wires);
     bfs(wires,n);
