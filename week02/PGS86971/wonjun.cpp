@@ -7,7 +7,12 @@
 
 using namespace std;
 #define MAX_N 100
-
+/*
+1. 핵심 로직: 각 노드의 방문여부 visited를 사용하여 트리에 연결된 노드의 개수 cnt를 조정하는 재귀함수 dfs(n,wires, i)를 생성
+dfs를 재귀호출하여 cnt를 구한뒤, 다른 트리와의 개수 차이를 최소값으로 갱신
+2. 선택 근거: 시간복잡도는 O(N^3)으로 높으나, N이 최대 100으로 낮기 때문에 성공하였음.
+인접리스트를 별도로 작성하지 않고 직관적이고 간결하게 작성하였음.
+*/
 // 노드의 방문여부 확인용 visited
 vector<bool> visited(MAX_N + 1, false);
 // 연결된 노드 개수 cnt
