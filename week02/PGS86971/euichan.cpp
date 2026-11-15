@@ -1,5 +1,7 @@
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #define BIG_NUM 10000
 
 /*
@@ -45,23 +47,22 @@ void Dfs(vector<vector<int>> &g, vector<int> &v, int num)
     }
 }
 
-int solution(int n, vector<vector<int>> wires) {
-    int answer = -1;
-    
+int solution(int n, vector<vector<int>> wires)
+{
     vector<vector<int>> graph(n + 1);
-    vector<int> visited(n + 1, 0);
+    vector<int> sub_tree_size(n + 1, 0); // [피드백 반영] visited라고 하면 의미 전달이 안 되고 가독성을 해칠 듯 하여 변수명 변경, 참고로 배열로도 구현 가능
     
     MakeGraph(graph, wires);
     
-    Dfs(graph, visited, 1);
+    Dfs(graph, sub_tree_size, 1);
     
-    int min = BIG_NUM;
+    int answer = BIG_NUM; // [피드백 반영] min 변수 대신 answer 사용
     
     for (int i = 2; i <= n; i++)
     {
-        int temp = abs(n - 2 * visited[i]);
-        min = min > temp ? temp : min; 
+        int temp = abs(n - 2 * sub_tree_size[i]);
+        answer = min(answer, temp); // [피드백 반영] 삼항 연산자 대신 min 함수 사용
     }
     
-    return answer = min;
+    return answer;
 }
