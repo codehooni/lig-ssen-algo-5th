@@ -11,6 +11,7 @@ using namespace std;
 
 // 1. 핵심 로직: map 컨테이너를 이용해서 각 차량의 시간을 O(1) 시간복잡도로 처리
 // 2. 선정 이유: -
+// 시간복잡도: O(N^2)
 
 int time_diff(string in, string out) {
     int h1 = stoi(in.substr(0, 2));

@@ -8,6 +8,7 @@ using namespace std;
 
 // 1. 핵심 로직: 문자열 처리 함수들을 통한 문자열 조작
 // 2. 선정 이유: 직관적이고 정확한 문제풀이를 위해서
+// 시간 복잡도: O(N), 최대 1000번을 7번 반복.
 
 string solution(string new_id) {
     string answer = new_id;
