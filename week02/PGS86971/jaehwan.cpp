@@ -15,10 +15,9 @@ bool vis[100 + 2];
 // 인접 행렬을 쓴 이유: 간선을 끊는 과정을 단순한 로직 및 O(1)의 시간복잡도로 진행하기 위해서
 // 시간복잡도: O(N^2)
 
-int BFS(int v1, int v2, int n)
+int BFS(int v1, int n)
 {
     int cnt1 = 0;
-    int cnt2 = 0;
     queue<int> q;
     q.push(v1);
     while(!q.empty())
@@ -27,19 +26,14 @@ int BFS(int v1, int v2, int n)
         vis[cur] = true;
         cnt1++;
         for(int i = 1; i <= n; i++)
-            if(matrix[cur][i] && !vis[i]) q.push(i);
-    }
-    q.push(v2);
-    while(!q.empty())
-    {
-        int cur = q.front(); q.pop();
-        vis[cur] = true;
-        cnt2++;
-        for(int i = 1; i <= n; i++)
-            if(matrix[cur][i] && !vis[i]) q.push(i);
+            if(matrix[cur][i] && !vis[i])
+            { 
+                vis[i] = true;
+                q.push(i);
+            }
     }
     for(int i = 1; i <= n; i++) vis[i] = false;
-    return abs(cnt1 - cnt2);
+    return abs(cnt1 - (n - cnt1));
 }
 
 int solution(int n, vector<vector<int>> wires) {
@@ -62,7 +56,7 @@ int solution(int n, vector<vector<int>> wires) {
         v2 = wires[i][1];
         matrix[v1][v2] = 0;
         matrix[v2][v1] = 0;
-        int temp = BFS(v1, v2, n);
+        int temp = BFS(v1, n);
         if(answer > temp) answer = temp;
         matrix[v1][v2] = 1;
         matrix[v2][v1] = 1;

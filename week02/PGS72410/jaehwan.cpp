@@ -44,8 +44,8 @@ string solution(string new_id) {
             }
         case 4:
         // 4단계: new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
-            if(answer[0] == '.') answer.erase(answer.begin());
-            if(*(answer.end() - 1) == '.') answer.erase(answer.end() - 1);
+            if(!answer.empty() && (answer[0] == '.')) answer.erase(answer.begin());
+            if(!answer.empty() && (*(answer.end() - 1) == '.')) answer.erase(answer.end() - 1);
             break;
         case 5:
         // 5단계: new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
