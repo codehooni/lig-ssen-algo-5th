@@ -23,6 +23,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <algorithm>
 #include <vector>
 
 using namespace std;
@@ -31,11 +32,9 @@ string solution(string new_id) {
     
     for(auto& c : new_id) c = tolower(c);
     
-    for(int i = 0; i < new_id.size();) {
-        char c = new_id[i];
-        if(!(islower(c) || isdigit(c) || c == '-' || c == '_' || c == '.')) new_id.erase(i, 1);
-        else i++;
-    }
+    new_id.erase(remove_if(new_id.begin(), new_id.end(), [](unsigned char c) {
+        return !(islower(c) || isdigit(c) || c == '-' || c == '_' || c == '.');
+    }), new_id.end());
     
     for(int i = 0; i < new_id.size(); i++) {
         char c = new_id[i];
