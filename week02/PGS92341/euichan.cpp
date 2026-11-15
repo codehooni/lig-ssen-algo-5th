@@ -94,17 +94,13 @@ vector<int> CalculateFees(vector<int> &f, unordered_map<string, int> &v)
     
     for (const string &car_ : car_names)
     {
-        if (val[car_] && val[car_] <= normal_t)
+        if (val[car_] <= normal_t) // [피드백 반영] 불필요한 조건 제거
         {
             val[car_] = normal_v;
         }
-        else if ((val[car_] - normal_t) % unit_t)
-        {
-            val[car_] = normal_v + ((val[car_]- normal_t) / unit_t + 1) * unit_v;
-        }
         else
         {
-            val[car_] = normal_v + ((val[car_]- normal_t) / unit_t) * unit_v;
+            val[car_] = normal_v + (((val[car_] - normal_t) + unit_t - 1) / unit_t) * unit_v; // [피드백 반영] 올림 연산 통합
         }
         
         ans.push_back(val[car_]);
