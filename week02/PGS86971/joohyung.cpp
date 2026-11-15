@@ -56,7 +56,7 @@ int solution(int n, vector<vector<int>> wires) {
         // BFS함수 호출
         int delta=abs(BFS(v1,n)-BFS(v2,n));
         if (delta<answer){
-            answer=abs(BFS(v1,n)-BFS(v2,n));
+            answer=delta;
         }
         
         arr[v1][v2]=1;
