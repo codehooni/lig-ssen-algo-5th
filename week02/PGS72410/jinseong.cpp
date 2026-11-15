@@ -46,6 +46,7 @@ string step_3(const string& s) {
 }
 
 string step_4(const string& s) {
+    if (s.empty()) return "";
     int start = 0, end = s.size();
     if (s.front() == '.') start++;
     if (s.back() == '.') end--;
