@@ -1,5 +1,7 @@
 #include <string>
 #include <vector>
+#include <cctype>
+
 #define MIN_LEN 3
 #define MAX_LEN 15
 
@@ -32,13 +34,15 @@ using namespace std;
     7) new_id가 2자 이하 -> 마지막 문자를 길이가 3이 될 때까지 붙이기
 */
 
+const char offset = 'a' - 'A';
+
 void Step1(string &id_in)
 {
     for (int i = 0; i < id_in.size(); i++)
     {
         if (id_in[i] >= 'A' && id_in[i] <= 'Z')
         {
-            id_in[i] += ('a' - 'A');
+            id_in[i] += offset; // [피드백 반영] 'a' - 'A'를 상수로 변경
         }
     }
 }
@@ -47,8 +51,7 @@ void Step2(string &id_in) // 인덱스가 앞으로 하나씩 당겨짐 주의
 {
     for (int i = 0; i < id_in.length();)
     {
-        if ((id_in[i] <= 'z' && id_in[i] >= 'a') ||
-            (id_in[i] <= '9' && id_in[i] >= '0') ||
+        if (isalnum(id_in[i])|| // [피드백 반영] isalnum 함수 사용
             (id_in[i] == '-' || id_in[i] == '_' || id_in[i] == '.'))
         {
             i++;
@@ -88,8 +91,8 @@ void Step3(string &id_in)
 void Step4(string &id_in)
 {
     if (!id_in.length()) return;
-    if (id_in[0] == '.') id_in.erase(0, 1);
-    if (id_in[id_in.length() - 1] == '.') id_in.erase(id_in.length() - 1, 1);
+    if (id_in.front() == '.') id_in.erase(0, 1); // [피드백 반영] 인덱스에서 front, back 메소드 사용으로 변경
+    if (id_in.back() == '.') id_in.pop_back();
 }
 
 void Step5(string &id_in)
@@ -107,7 +110,7 @@ void Step6(string &id_in)
 void Step7(string &id_in)
 {
     if (id_in.length() < MIN_LEN)
-        id_in.append(MIN_LEN - id_in.length(), id_in[id_in.length() - 1]);
+        id_in.append(MIN_LEN - id_in.length(), id_in.back());
 }
 
 string solution(string new_id)
