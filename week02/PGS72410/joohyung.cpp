@@ -6,7 +6,11 @@ using namespace std;
  * 1. 핵심 로직: Programmers에서 기술한 순서대로 문자열 수정을 진행한다 for문으로 문자열 완전 탐색을 진행한다
  * 2. 선택 근거: 
  */
-
+void pop_back (string& new_id) { // 리뷰 반영한 함수화
+     if (new_id.back()=='.') {
+        new_id.pop_back();
+    } 
+}
 string solution(string new_id) {
     string answer = "";
     
@@ -47,9 +51,7 @@ string solution(string new_id) {
         new_id.erase(0,1);
     }
     
-    if (new_id.back()=='.') {
-        new_id.pop_back();
-    } 
+    pop_back(new_id);
     
     // Step 5: new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
     if (new_id.empty())
@@ -59,10 +61,7 @@ string solution(string new_id) {
     if (new_id.length()>=16)
     {
         new_id=new_id.substr(0,15);
-        if (new_id.back()=='.')
-        {
-            new_id.pop_back();
-        }
+        pop_back(new_id); // 리뷰 반영한 함수화
     }
     
     if (new_id.length()<=2){

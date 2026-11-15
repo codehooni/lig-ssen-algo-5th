@@ -13,7 +13,16 @@ using namespace std;
  */
 
 bool arr[MAX_N][MAX_N]={0}; // 연결 여부를 인접행렬로 나타내기 위한 2차원 배열
-
+// int DFS(int start,int n) {
+//     int cnt=1;
+//     visited[start]=true;
+//     for(int i=1;i<=n;i++) {
+//         if(!visited[i]&&arr[start][i])
+//         {
+//             cnt+=DFS(i,n);
+//         }
+//     }
+// }
 int BFS(int start,int n) {
     bool visited[MAX_N]={0};
     queue<int> q;
@@ -54,7 +63,7 @@ int solution(int n, vector<vector<int>> wires) {
         arr[v1][v2] = 0;
         arr[v2][v1] = 0;
         // BFS함수 호출
-        int delta=abs(BFS(v1,n)-BFS(v2,n));
+        int delta=abs(n-2*BFS(v1,n)); // 리뷰반영하여 수정
         if (delta<answer){
             answer=delta;
         }

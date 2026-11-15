@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  * 1. 핵심 로직: DFS를 활용 (미해결 AI 도움 받음) 
- * 2. 선택 근거: DFS의 시작점을 임의로 주더라도 가장 먼 거리의 있는 값은 Leaf node임 그 Leaf node를 시작점으로 해서 최대 거리를 구하면 트리의 지름을 구할 수 있음
+ * 2. 선택 근거: DFS의 시작점을 임의로 주더라도 해당 지점과 가장 먼 거리의 있는 점은 Leaf임 그 Leaf node를 시작점으로 해서 최대 거리를 구하면 트리의 지름을 구할 수 있음
  */
 
 vector<pair<int,int>> adj[MAX_N];
