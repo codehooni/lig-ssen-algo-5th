@@ -1,62 +1,70 @@
+/*
+ 1. 핵심 로직:
+    - 문제에서 요구하는 7단계를 순서대로 구현한다.
+    - C++의 문자열 관련 문법을 검색하고 응용해보고자 했다.
+    - transform, tolower, isdigit, erase 등을 사용했다.
+
+ 2. 선택 근거:
+    - 문자열 중간의 문자를 제거하면 인덱스가 변경되므로 뒤에서부터 검사한다.
+    - erase를 반복해서 사용하므로 최악의 경우 시간복잡도는 O(n²)이다.
+*/
+
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <cctype>
 using namespace std;
 
-//알고리즘 자체는 간단하다 해당 문제는 
-//c++의 문법을 검색해서 찾아보고 응용해보고자한다.
-
-//이상한 문자들 제거
-bool check2(char c){
+// 허용되는 문자인지 검사
+bool isValidChar(char c){
     switch(c){
         case '-':
         case '_':
         case '.':
             return true;
     }
-    //isdigit은 <cctype>내장된 문자가 정수인지 검사해주는 함수
-    if((c>=97 && c<=122) || isdigit(c)) return true;
-    
+    // isdigit은 <cctype>에 정의된 숫자 판별 함수
+    if((c >= 'a' && c <= 'z') || isdigit(c)) return true;
+
     return false;
 }
 
 string solution(string new_id) {
-    string answer = new_id;
-    //<ctype.h>에 속한 c언어의 글로벌 함수 tolower을 호출하기위해 ::사용
-    //transform(시작_위치, 끝_위치, 저장할_시작_위치, 변환_함수);
-    //1번
+    // transform(시작 위치, 끝 위치, 저장할 시작 위치, 변환 함수)
+    // ::tolower은 전역 함수 tolower을 사용하기 위함
+    // 1단계
     transform(new_id.begin(),new_id.end(),new_id.begin(),::tolower);
-    
-    // 문자열을 뒤에서부터 지우면 인덱스를 지워도 컨테이너 변경문제가 발생하지 않는다.
-    // 2번
+
+    // 뒤에서부터 지우면 인덱스가 변경되는 문제를 피할 수 있다.
+    // 2단계
     for(int i=new_id.length()-1;i>=0;i--){
-        if(!check2(new_id[i]))
+        if(!isValidChar(new_id[i]))
             new_id.erase(i,1);
     }
-    
-    //3번
+
+    // 3단계
     for(int i=new_id.length()-1;i>0;i--){
         if(new_id[i]=='.' && new_id[i-1]=='.')
             new_id.erase(i,1);
     }
-    //4번
-    if(new_id[0] == '.')
+
+    // 4단계
+    if(!new_id.empty() && new_id[0] == '.')
         new_id.erase(0,1);
-    if(new_id[new_id.length()-1] == '.')
+    if(!new_id.empty() && new_id[new_id.length()-1] == '.')
         new_id.erase(new_id.length()-1,1);
-    
-    //5단계
+
+    // 5단계
     if(new_id.length()==0)
         new_id = "a";
-    
-    //6단계
+
+    // 6단계
     if(new_id.length()>=16){
         new_id.erase(15);
         if(new_id[new_id.length()-1] == '.')
             new_id.erase(new_id.length()-1,1);
     }
-    //7단계
+
+    // 7단계
     if(new_id.length()<=2){
         int len = 3-new_id.length();
         for(int i=0;i<len;i++){
