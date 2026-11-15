@@ -9,9 +9,7 @@ using namespace std;
 * 1. 핵심 로직: DFS를 진행하며 거리 값을 더해가다가 그 전 DFS 함수가 리턴되어 그전 노드로 돌아가면 거리 값을 뺀다.
 *              최대 거리 값을 저장하고
 *
-* 2. 선택 근거: 7단계까지 있고, 문자열의 길이가 최대 1,000으로
-*              O(N^2)까지 가능할만큼 시간복잡도에 여유가 있는 것으로 보아
-*              주어진 단계를 충실히 구현하는 문제로 판단함.
+* 2. 선택 근거: 트리를 전부 탐색해보아야 할 것으로 판단되어 DFS를 사용했고, 이전에 돌아갈 때 값을 뺐던 DFS 풀이가 생각이 나서 적용해봄.
 */
 
 /*
@@ -32,11 +30,11 @@ typedef struct _node
 
 vector<vector<int>> lines;
 vector<vector<node_t>> graph;
-vector<int> visited(MAX_NUM);
+// vector<int> visited(MAX_NUM);
+int visited[MAX_NUM]; // [피드백 반영] 방문 배열은 요소 입출을 하는 것이 아니므로 일반 배열로 변경
 
 void InputData()
 {
-    V;
     cin >> V;
     lines.resize(V);
 
@@ -52,17 +50,17 @@ void InputData()
     }
 }
 
-void MakeGraph(vector<vector<int>> &l)
+void MakeGraph(void)
 {
     graph.resize(V + 1);
 
-    for (int i = 0; i < l.size(); i++)
+    for (int i = 0; i < lines.size(); i++)
     {
-        int node = l[i][0];
+        int node = lines[i][0];
         
-        for (int j = 1; l[i][j] != -1; j = j + 2)
+        for (int j = 1; lines[i][j] != -1; j = j + 2)
         {
-            graph[node].push_back((node_t){l[i][j+1], l[i][j]});
+            graph[node].push_back((node_t){lines[i][j+1], lines[i][j]});
         }
     }
 }
@@ -90,7 +88,7 @@ int main(void)
 {
     // freopen("test_case.txt", "r", stdin);
     InputData();
-    MakeGraph(lines);
+    MakeGraph();
 
     // for (int i = 1; i <= V; i++)
     // {
@@ -103,7 +101,8 @@ int main(void)
         
     Dfs(graph, 1);
     cnt = 0;
-    visited.assign(V + 1, 0);
+    // visited.assign(V + 1, 0);
+    memset(visited, 0, sizeof(int) * (V + 1)); // [피드백 반영] memset으로 초기화
     Dfs(graph, that_point);
     cout << max_val;
 
