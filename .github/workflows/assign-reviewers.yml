@@ -52,8 +52,11 @@ jobs:
               return;
             }
 
-            // README의 리뷰어 배정 계산식: k칸 뒤, 2k칸 뒤 (k는 1 ~ n-1)
-            const k = ((week - 1) % (n - 1)) + 1;
+            // README의 리뷰어 배정 계산식: k칸 뒤, 2k칸 뒤
+            // k는 1 ~ n-1을 차례로 쓰되, 2k칸 뒤가 자기 자신이 되는 k(= n/2)는 건너뜀
+            const ks = [];
+            for (let c = 1; c < n; c++) if ((2 * c) % n !== 0) ks.push(c);
+            const k = ks[(week - 1) % ks.length];
             const reviewers = [members[(i + k) % n], members[(i + 2 * k) % n]];
             core.info(`${week}주차 (k = ${k}) ${members[i]} → ${reviewers.join(', ')}`);
 
