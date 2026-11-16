@@ -54,13 +54,14 @@ week01/
 | 9 | 주윤빈 | yunbin | [<img src="https://github.com/dkdltm221.png?size=40" width="40" height="40" alt="dkdltm221"> dkdltm221](https://github.com/dkdltm221) |
 | 10 | 김재희 | jaehee | [<img src="https://github.com/jaeee320.png?size=40" width="40" height="40" alt="jaeee320"> jaeee320](https://github.com/jaeee320) |
 | 11 | 최원준 | wonjun | [<img src="https://github.com/Dreaming1024155.png?size=40" width="40" height="40" alt="Dreaming1024155"> Dreaming1024155](https://github.com/Dreaming1024155) |
+| 12 | 정원필 | wonpil | [<img src="https://github.com/jwp72012070.png?size=40" width="40" height="40" alt="jwp72012070"> jwp72012070](https://github.com/jwp72012070) |
 
 ## 리뷰어 배정
 
-멤버 표를 번호 순서대로 원형으로 세우고, 내 번호에서 **k칸 뒤**와 **2k칸 뒤** 사람이 이번 주 내 리뷰어입니다. 11번 다음은 다시 1번입니다.
+멤버 표를 번호 순서대로 원형으로 세우고, 내 번호에서 **k칸 뒤**와 **2k칸 뒤** 사람이 이번 주 내 리뷰어입니다. 12번 다음은 다시 1번입니다.
 
-- k는 주차 번호입니다. 11주차부터는 10을 뺀 값(11주차는 1, 12주차는 2)을 씁니다.
-- 번호 i인 멤버의 리뷰어: `(i - 1 + k) % 11 + 1`번, `(i - 1 + 2k) % 11 + 1`번
+- k는 주차 번호입니다. 12주차부터는 11을 뺀 값(12주차는 1, 13주차는 2)을 씁니다.
+- 번호 i인 멤버의 리뷰어: `(i - 1 + k) % 12 + 1`번, `(i - 1 + 2k) % 12 + 1`번
 
 모두가 리뷰어 2명을 받고, 담당 PR도 정확히 2개씩 돌아갑니다.
 
@@ -68,8 +69,8 @@ PR을 만들면 GitHub Actions가 작성자의 GitHub 아이디를 위 멤버 �
 
 | 주차 | 예시 |
 | --- | --- |
-| 1주차 (k = 1) | 7번 이지훈 → 8번 전진성, 9번 주윤빈 / 11번 최원준 → 1번 김재환, 2번 김주형 |
-| 2주차 (k = 2) | 7번 이지훈 → 9번 주윤빈, 11번 최원준 / 11번 최원준 → 2번 김주형, 4번 백웅일 |
+| 1주차 (k = 1) | 7번 이지훈 → 8번 전진성, 9번 주윤빈 / 12번 정원필 → 1번 김재환, 2번 김주형 |
+| 2주차 (k = 2) | 7번 이지훈 → 9번 주윤빈, 11번 최원준 / 12번 정원필 → 2번 김주형, 4번 백웅일 |
 
 ## 주의 사항
 
