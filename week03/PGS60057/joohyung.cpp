@@ -5,7 +5,7 @@ using namespace std;
 
 // 풀이 방법: 완전 탐색
 // 알고리즘: 문제에서 기술한 대로 완전 탐색을 진행한다
-// 시간복잡도: O(N^2) (문자열의 길이가 1000이하이므로 문제가 되지 않는다고 판단했습니다.
+// 시간복잡도: O(N^2) (문자열의 길이가 1000이하이므로 문제가 되지 않는다고 판단했습니다.)
 
 int solution(string s) {
     int answer = s.length();
@@ -25,7 +25,7 @@ int solution(string s) {
             }
             else { // Step 2-2: 이전 부분 문자열과 다른 경우
                 length+=prev.length();
-                if (record > 1) length+=to_string(record).length(); // 중복 횟수가 10이면 길이가 2증가되어야함 (초기에 고려하지 않아서 에러 발생)
+                if (record > 1) length+=to_string(record).length(); // 중복 횟수가 10이면 길이가 2증가되어야함 (초기에 고려하지 않아서 오답 발생)
                 record=1;
                 prev=s.substr(j,i);
             }

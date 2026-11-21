@@ -19,7 +19,7 @@ string solution(string number, int k) {
         answer.push_back(number[i]);
     }
     
-    // Step 2: 삭제 할 리스트가 남겨져 있으
+    // Step 2: 삭제 할 리스트가 남겨져 있는 경우
     if (k>0)
         answer=answer.substr(0,answer.length()-k);
         
