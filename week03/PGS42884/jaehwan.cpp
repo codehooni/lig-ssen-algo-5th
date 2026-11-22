@@ -23,10 +23,16 @@ int solution(vector<vector<int>> routes) {
     int answer = 0;
     sort(routes.begin(), routes.end(), [](vector<int> a, vector<int> b)
                                             {
-                                                return a[0] < b[0];
+                                                return a[1] < b[1];
                                             });
 //    for(int i = 0; i < routes.size(); i++)
 //        cout << routes[i][0] << " " << routes[i][1] << endl;
-    
+    int lastCCTV = -39999;
+    for(auto& r : routes) 
+    {
+        if(r[0] <= lastCCTV && lastCCTV <= r[1]) continue;
+        lastCCTV = r[1];
+        answer++;
+    }
     return answer;
 }

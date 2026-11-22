@@ -13,32 +13,39 @@ using namespace std;
 */
 
 // -- 2시간 초과 --
-int solution(string s) {
-    int answer = 0;
-    string str = "";
+int solution(string s) 
+{
     int len = s.length();
-    int half = len / 2;
-    int rest = 0;
-    for(int digit = 1; digit < half; digit++)
+    int answer = len;                        // 압축 안 했을 때가 최댓값
+
+    for (int digit = 1; digit <= len / 2; digit++) 
     {
-        int idx = 0;
+        string result = "";
+        string prev = s.substr(0, digit);    // 비교 기준이 되는 앞 조각
         int cnt = 1;
-        string temp = s.substr(idx, digit);
-        while(idx <= len - digit*2 + 1)
+
+        for (int i = digit; i < len; i += digit) 
         {
-            if(s.substr(idx + digit, digit) == temp) cnt++;
+            string cur = s.substr(i, digit);
+
+            // compare는 같으면 0 → "== 0"이 "같다"는 뜻
+            if (cur.compare(prev) == 0) 
+            {
+                cnt++;
+            } 
             else 
             {
-                if(cnt - 1) str += temp;
-                else 
-                {
-                    str += (to_string(cnt) + temp);
-                    cnt = 1;
-                    temp = 
-                }
+                if (cnt > 1) result += to_string(cnt);
+                result += prev;
+                prev = cur;
+                cnt = 1;
             }
-            idx += digit;
         }
+        // 마지막 조각 처리
+        if (cnt > 1) result += to_string(cnt);
+        result += prev;
+
+        answer = min(answer, (int)result.length());
     }
     return answer;
 }
