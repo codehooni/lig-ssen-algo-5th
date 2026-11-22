@@ -22,7 +22,6 @@ string solution(string number, int k) {
         answer += num;
     }
     
-    while (k-- != 0) answer.pop_back();
-    
+    answer.resize(answer.size() - k);
     return answer;
 }
