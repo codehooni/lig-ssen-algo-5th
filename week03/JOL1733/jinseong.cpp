@@ -6,25 +6,32 @@
 using namespace std;
 
 /*
-    시간 복잡도: O(N^2) (문자열 초기화 등 있긴 한데 크지 않을 것 같음)
-    접근 방식: 행, 열, 대각선별로 string 배열을 만들고 스택처럼 바둑알을 쌓으며 비교함.
-    선택 근거: 지점별로 동일한 바둑알이 5개 놓였는지 검사하기 위해 string을 스택처럼 활용.
+    시간 복잡도: O(N^2)
+    접근 방식: 바둑알을 카운팅할 구조체를 만들고 행, 열, 대각선별로 비교하며 오목인지 확인.
+    선택 근거: 각 행, 열, 대각선별로 바둑알 누적수를 확인하기 위해 구조체 배열 활용.
     핵심 로직:
-        1. 전체 바둑판을 순회하며 각 행, 열, 대각선에 다음 조건을 고려하며 바둑알을 쌓음
-            a. 이전 위치와 동일한 바둑알이면 1개 추가함
-            b. 현재 바둑알이 다르고 쌓인 바둑알이 5개가 아니면 새로운 바둑알로 변경
-        2. 행, 열, 대각선 각각 1에서 고려하지 못한 1, 19 끝점 부분 재검사
-        3. 승자가 결정나면 승자와 가장 왼쪽 좌표 출력하고 아니면 0 출력
+        1. 전체 바둑판을 순회하며 각 행, 열, 대각선에 다음 조건을 고려하며 바둑알 카운팅
+            a. 이전과 동일한 색이면 카운트 1 증가
+            b. 색이 다르고 이전 카운트가 5개가 아니면 새로운 바둑알로 초기화
+        2. 승자가 결정나면 가장 왼쪽 좌표로 조정하고 승자 정보를 받아와 출력
+        3. 승자가 없으면 '0' 출력
 */
 
 #define N 19
-char board[N + 1][N + 1];
-string dr[2 * N + 1];
-string dl[2 * N + 1];
-string rw[N + 1];
-string cl[N + 1];
-char win = '0';
-int x, y;
+
+typedef struct _omok {
+    int y;
+    int x;
+    int cnt;
+    char color;
+} omok;
+
+char board[N + 2][N + 2];
+omok rw[N + 2];
+omok cl[N + 2];
+omok dr[2 * N + 2];
+omok dl[2 * N + 2];
+omok* win;
 
 void input_board() 
 {
@@ -38,131 +45,52 @@ void input_board()
     }
 }
 
-bool check(string *s, int idx, char v) {
-    auto & loc = s[idx];
+int toIdx(omok *omk, int r, int c) {
+    if (omk == rw) return r;
+    if (omk == cl) return c;
+    if (omk == dr) return r + c;
+    if (omk == dl) return N + r - c;
+    return -1;
+}
 
-    if (loc.empty() || loc.back() == v) {
-        loc += v;
+bool checkWin(omok *omk, int r, int c) {
+    int idx = toIdx(omk, r, c);
+    char v = board[r][c];
+    omok &o = omk[idx];
+
+    if (o.color == v) {
+        o.cnt += 1;
         return false;
     }
 
-    if (loc.size() != 5 || loc.back() == '0') {
-        loc = v;
+    if (o.cnt != 5 || o.color == '0') {
+        o = (omok){ r, c, 1, v };
         return false;
     }
 
+    // 가장 왼쪽 좌표로 변환(우대각선)
+    if (o.x > c) {
+        o.y = r - 1;
+        o.x = c + 1;
+    }
+
+    win = omk + idx;
     return true;
 }
 
-bool checkWin(int i, int j) {
-    char v = board[i][j];
-
-    if (check(rw, i, v)) {
-        win = rw[i].back();
-        y = i;
-        x = j - 5;
-        return true;
-    }
-
-    if (check(cl, j, v)) {
-        win = cl[j].back();
-        y = i - 5;
-        x = j;
-        return true;
-    }
-
-    if (check(dr, i + j, v)) {
-        win = dr[i + j].back();
-        y = i - 1;
-        x = j + 1;
-        return true;
-    }
-
-    if (check(dl, N + i - j, v)) {
-        win = dl[N + i - j].back();
-        y = i - 5;
-        x = j - 5;
-        return true;
-    }
-
-    return false;
-}
-
-// 극값 고려
-bool checkPole() {
-    // r -> c == N
-    for (int i = 1; i <= N; i++) {
-        if (rw[i].size() != 5 || rw[i].back() == '0') continue;
-        win = rw[i].back();
-        y = i;
-        x = N - 4;
-        return true;
-    }
-
-    // c -> r == N
-    for (int i = 1; i <= N; i++) {
-        if (cl[i].size() != 5 || cl[i].back() == '0') continue;
-        win = cl[i].back();
-        y = N - 4;
-        x = i;
-        return true;
-    }
-
-    // dr -> r == N
-    for (int i = 1; i <= N - 4; i++) 
-    {
-        if (dr[N + i].size() != 5 || dr[N + i].back() == '0') continue;
-        win = dr[N + i].back();
-        y = N;
-        x = i;
-        return true;
-    }
-
-    // dr -> c == 1
-    for (int i = 5; i <= N; i++) {
-        if (dr[1 + i].size() != 5 || dr[1 + i].back() == '0') continue;
-        win = dr[1 + i].back();
-        y = i;
-        x = 1;
-        return true;
-    }
-
-    // dl -> r == N
-    for (int i = 5; i <= N; i++) {
-        if (dl[N + N - i].size() != 5 || dl[N + N - i].back() == '0') continue;
-        win = dl[N + N - i].back();
-        y = N - 4;
-        x = i - 4;
-        return true;
-    }
-
-    // dl -> c == N
-    for (int i = 1; i <= N - 4; i++) {
-        if (dl[N + i - N].size() != 5 || dl[N + i - N].back() == '0') continue;
-        win = dl[N + i - N].back();
-        y = i;
-        x = N - 4;
-        return true;
-    }
-    
-    return false;
-}
-
 void solution() {
-    for (int i = 1; i <= N; i++) {
-        for (int j = 1; j <= N; j++) {
-            if (checkWin(i, j)) {
-                cout << win << endl;
-                cout << y << " " << x << endl;
+    for (int r = 1; r <= N + 1; r++) {
+        for (int c = 1; c <= N + 1; c++) {
+            if (checkWin(rw, r, c) ||
+                checkWin(cl, r, c) ||
+                checkWin(dr, r, c) ||
+                checkWin(dl, r, c)
+            ) {
+                cout << win->color << endl;
+                cout << win->y << " " << win->x << endl;
                 return;
             }
         }
-    }
-
-    if (checkPole()) {
-        cout << win << endl;
-        cout << y << " " << x << endl;
-        return;
     }
 
     cout << "0" << endl;
