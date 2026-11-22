@@ -7,21 +7,20 @@ using namespace std;
 // 알고리즘: answer string을 stack처럼 활용한다
 // 시간복잡도: O(N+K)
 string solution(string number, int k) {
-    string answer = "";
+    string answer = number.substr(0, 1);
   
     // Step 1: answer string을 stack 처럼 활용하며 복사한다 
-    answer.push_back(number[0]);
     for (int i=1;i<number.length();i++){
         while(k>0 && !answer.empty() && number[i]>answer.back()){
             answer.pop_back();
             k--;
         }
-        answer.push_back(number[i]);
+        answer+=number[i];
     }
     
     // Step 2: 삭제 할 리스트가 남겨져 있는 경우
-    if (k>0)
-        answer=answer.substr(0,answer.length()-k);
+    // if (k>0)
+    //     answer=answer.substr(0,answer.length()-k);
         
-    return answer;
+   return answer.substr(0, answer.length() - k);
 }

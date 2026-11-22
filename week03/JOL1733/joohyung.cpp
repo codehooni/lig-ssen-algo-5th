@@ -1,5 +1,6 @@
 #include <iostream>
 #define MAX_N (19)
+#define OMOK (5)
 using namespace std;
 
 /*
@@ -32,33 +33,58 @@ void input_data() {
         for (int j=1;j<=MAX_N;j++)
            {
             cin >> arr[i][j];
-            if (arr[i][j])
-                 for (int k=0;k<4;k++)
+            if (arr[i][j]){
+                    for (int k=0;k<4;k++)
                     {
                         acc[i][j].sum[k]=1; // 자기 자신이 연속의 출발점이다
                     }
+            }
+                 
            }
     }
 }
 
 int main(){
     input_data();
-    for (int j=1;j<=MAX_N;j++){ // 이전 칸이 모두 왼쪽 열 또는 같은 열 위쪽이므로, 열 우선으로 돌아야 누적값이 먼저 채워진다
-        for(int i=1;i<=MAX_N;i++){
-            for (int k=0;k<4;k++){
-                if (arr[i][j] !=0 && arr[i][j]==arr[i+dr[k]][j+dc[k]]){
-                    acc[i][j].sum[k]+=acc[i+dr[k]][j+dc[k]].sum[k];
-                    if (acc[i][j].sum[k]==5 && arr[i][j]!=arr[i-dr[k]][j-dc[k]])
-                    {
-                        cout<<arr[i][j]<<endl;
-                        cout << i+dr[k]*4<<" "<<j+dc[k]*4;
-                        return 0;
-                    }
+    // for (int j=1;j<=MAX_N;j++){ // 이전 칸이 모두 왼쪽 열 또는 같은 열 위쪽이므로, 열 우선으로 돌아야 누적값이 먼저 채워진다
+    //     for(int i=1;i<=MAX_N;i++){
+    //         for (int k=0;k<4;k++){
+    //             if (arr[i][j] !=0 && arr[i][j]==arr[i+dr[k]][j+dc[k]]){
+    //                 acc[i][j].sum[k]+=acc[i+dr[k]][j+dc[k]].sum[k];
+    //                 if (acc[i][j].sum[k]==5 && arr[i][j]!=arr[i-dr[k]][j-dc[k]])
+    //                 {
+    //                     cout<<arr[i][j]<<endl;
+    //                     cout << i+dr[k]*4<<" "<<j+dc[k]*4;
+    //                     return 0;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+   
+    //리뷰 반영
+    for (int j = 1; j <= MAX_N; j++) { // 이전 칸이 모두 왼쪽 열 또는 같은 열 위쪽이므로, 열 우선으로 돌아야 누적값이 먼저 채워진다
+        for (int i = 1; i <= MAX_N; i++) {
+            int color = arr[i][j];
+            if (color == 0) continue;                 // 빈칸은 네 방향 모두 볼 필요 없음
+
+            for (int k = 0; k < 4; k++) {
+                int pR = i + dr[k], pC = j + dc[k];   // 이전 칸
+                int nR = i - dr[k], nC = j - dc[k];   // 다음 칸
+
+                if (arr[pR][pC] != color) continue;   // 이전 칸과 색이 다르면 누적 없음
+
+                int &len = acc[i][j].sum[k];          // 이 돌에서 끝나는 연속 길이
+                len += acc[pR][pC].sum[k];
+
+                if (len == OMOK && arr[nR][nC] != color) {
+                    cout << color << endl;
+                    cout << i + dr[k] * (OMOK - 1) << " " << j + dc[k] * (OMOK - 1);
+                    return 0;
                 }
             }
         }
     }
-
     cout << 0;
     return 0;
      
