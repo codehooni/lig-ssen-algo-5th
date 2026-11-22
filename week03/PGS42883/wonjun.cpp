@@ -6,9 +6,9 @@
 
 using namespace std;
 /*
-2 ~ 1,000,000자리 이하의 숫자에서 k개 수를 제거할 때 가장 큰 숫자
-최종 숫자는 n - k개가 된다
-앞자리가 최대가 되어야 가장 크므로, 맨 앞의 k+1개 중 가장 큰 값부터 answer에 추가한다.
+
+1. 핵심 로직: N개 중에서 K개를 골라야 하므로, 맨 앞의 K+1개 중 하나를 반드시 선택하는 방식 사용
+2. 선택 근거: 맨 앞자리가 가장 클 때 가장 큰 수가 보장되므로, 이 과정을 K번 반복해야한다
 */
 
 string solution(string number, int k) {
@@ -23,7 +23,7 @@ string solution(string number, int k) {
         // 현재값 추가
         answer.push_back(c);
     }
-    // 7654321 처럼 내림차순이면 뒷자리 제거
+    // 뒷자리 제
     answer.resize(number.size()-k);
     return answer;
 }
