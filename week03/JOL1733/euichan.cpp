@@ -32,7 +32,7 @@ using namespace std;
 - 검 1 흰 2 빈 0
 */
 
-int input_arr[21][21];
+int input_arr[21][21]; // 인덱스 1 ~ 19까지 사용하고, 6이상인지 검증하는 로직에서 다음 인덱스를 살피기 때문에 21까지 확장하여 추가
 int arr[2] = { 0 };
 
 void InputData(void)
@@ -48,11 +48,11 @@ void InputData(void)
 
 int CheckGaro(void)
 {
-    int b_cnt = 0;
-    int w_cnt = 0;
+    int b_cnt = 0; // 검은색이 연이어 몇 번 나왔는지 
+    int w_cnt = 0; // 흰색이 연이어 몇 번 나왔는지
 
-    bool b_prev = false;
-    bool w_prev = false;
+    bool b_prev = false; // 이전 값이 검은색이었는지
+    bool w_prev = false; // 이전 값이 흰색이었는지
 
     for (int i = 1; i <= 19; ++i)
     {
@@ -185,6 +185,52 @@ int CheckSero(void)
     return 0;
 }
 
+// 아래와 같이 하면 가로, 세로 합칠 수 있음
+
+/*
+// sero가 true면 행/열을 바꿔서 읽음
+int Get(int i, int j, bool sero)
+{
+    return sero ? input_arr[j][i] : input_arr[i][j];
+}
+
+int CheckLine(bool sero)
+{
+    for (int i = 1; i <= 19; ++i)
+    {
+        int cnt = 0;   // 같은 색이 연속으로 몇 개인지
+        int prev = 0;  // 직전 칸의 색 (0: 빈칸, 1: 검은색, 2: 흰색)
+
+        for (int j = 1; j <= 19; ++j)
+        {
+            int cur = Get(i, j, sero);
+
+            if (cur == 0)
+            {
+                cnt = 0;
+            }
+            else if (cur == prev)
+            {
+                ++cnt;
+            }
+            else // 새로운 연속 구간 시작
+            {
+                cnt = 1;
+                arr[0] = sero ? j : i;
+                arr[1] = sero ? i : j;
+            }
+            prev = cur;
+
+            // 정확히 5개이고, 다음 칸이 같은 색이 아니면 승리
+            if (cnt == 5 && Get(i, j + 1, sero) != cur)
+                return cur;
+        }
+    }
+    return 0;
+}
+
+*/
+
 int CheckRise(void)
 {
     int b_cnt = 0;
@@ -193,7 +239,8 @@ int CheckRise(void)
     bool b_prev = false;
     bool w_prev = false;
 
-    // 5행 1열부터 시작
+    // 여기는 윗대각선 검증
+    // 5행 1열부터 시작 (4행 1열까지는 대각선 요소가 4개이므로)
     for (int i = 5; i <= 19; i++)
     {
         int sum = i + 1;
@@ -257,6 +304,7 @@ int CheckRise(void)
         w_cnt = 0;
     }
 
+    // 여기는 아래 대각선 검증
     // 2행 19열부터
     for (int i = 2; i <= 15; i++)
     {
