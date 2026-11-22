@@ -46,16 +46,13 @@ int solution(string s) {
     
     for (int i = 1; i <= half; i++) {
         vector<pair<string, int>> v = {{ s.substr(0, i), 1 }};
-        int start = i;
         
-        while (start < s.size()) {
-            if (isSame(v.back().first, s, start)) {
+        for (int j = i; j < s.size(); j += i) {
+            if (isSame(v.back().first, s, j)) {
                 v.back().second += 1;
             } else {
-                v.push_back({ s.substr(start, i), 1 });
+                v.push_back({ s.substr(j, i), 1 });
             }
-
-            start += i;
         }
         
         answer = min(answer, encodedSize(v));
