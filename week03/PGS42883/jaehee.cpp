@@ -23,18 +23,6 @@ string solution(string number, int k) {
     int stk = 0;
     vector<char>temp_num;
     temp_num.push_back(number[0]);
-            /*
-    for(int i=1; i<n; ++i){
-        for(auto x:temp_num){
-            if(stk<k){
-                if(temp_num.empty()) continue;
-                if(number[i]>temp_num.back()){
-                    temp_num.pop_back();
-                    stk+=1;  
-                }
-            }
-        }
-        */
             
             for(int i=1; i<n; ++i){
                     while(!temp_num.empty()&&stk<k&&number[i]>temp_num.back()){
